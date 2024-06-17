@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="fec3b931-d80e-4785-8e4c-711578b1c402" name="DoRA">
+        <fileTransfer rootFolder="/home/yizhou/jianglin/DoRA" accessType="SFTP" host="155.33.196.44" port="22" sshConfigId="5c742d76-6450-41e8-9f97-5eb798d17b31" sshConfig="yizhou@155.33.196.44:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
