@@ -27,6 +27,7 @@ import os
 import warnings
 from contextlib import contextmanager
 
+import ipdb
 import torch
 from accelerate import dispatch_model, infer_auto_device_map
 from accelerate.hooks import AlignDevicesHook, add_hook_to_module, remove_hook_from_submodules
@@ -526,6 +527,7 @@ class PeftModelForCausalLM(PeftModel):
     """
 
     def __init__(self, model, peft_config: PeftConfig):
+        ipdb.set_trace()
         super().__init__(model, peft_config)
         self.base_model_prepare_inputs_for_generation = self.base_model.prepare_inputs_for_generation
 

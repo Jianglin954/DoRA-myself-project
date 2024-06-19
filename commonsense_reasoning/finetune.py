@@ -120,7 +120,8 @@ def train(
     )
 
     ipdb.set_trace()
-
+    # ipdb.set_trace()
+    # ipdb.set_trace()
 
     assert (
         base_model
@@ -178,6 +179,7 @@ def train(
     tokenizer.pad_token_id = (
         0  # unk. we want this to be different from the eos token
     )
+    # 每个 tokenizer 都可以指定一个特定的 token ID 用来表示这个 pad token。在很多 NLP 框架和模型中，默认的 pad token ID 是 0，但这是可配置的。
     tokenizer.padding_side = "left"  # Allow batched inference
 
     def tokenize(prompt, add_eos_token=True):

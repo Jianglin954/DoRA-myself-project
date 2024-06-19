@@ -161,6 +161,7 @@ class DoraModel(torch.nn.Module):
                 target_module_found = re.fullmatch(self.peft_config.target_modules, key)
             else:
                 target_module_found = any(key.endswith(target_key) for target_key in self.peft_config.target_modules)
+                # self.peft_config.target_modules: ['q_proj', 'k_proj', 'v_proj', 'up_proj', 'down_proj']
 
             if isinstance(self.peft_config.Wdecompose_target_modules, str):
                 wdecompose_target_module_found = re.fullmatch(self.peft_config.Wdecompose_target_modules, key)
@@ -229,6 +230,20 @@ class DoraModel(torch.nn.Module):
             )
 
     def _get_submodules(self, key):
+        '''
+        key:                            'model.layers.0.self_attn.q_proj'
+        ".".join(key.split(".")[:-1]):  'model.layers.0.self_attn'
+        parent:
+                                        LlamaSdpaAttention(
+                                          (q_proj): Linear(in_features=4096, out_features=4096, bias=False)
+                                          (k_proj): Linear(in_features=4096, out_features=4096, bias=False)
+                                          (v_proj): Linear(in_features=4096, out_features=4096, bias=False)
+                                          (o_proj): Linear(in_features=4096, out_features=4096, bias=False)
+                                          (rotary_emb): LlamaRotaryEmbedding()
+                                        )
+        target_name:                    'q_proj'
+        target:                         Linear(in_features=4096, out_features=4096, bias=False)
+        '''
         parent = self.model.get_submodule(".".join(key.split(".")[:-1]))
         target_name = key.split(".")[-1]
         target = self.model.get_submodule(key)
